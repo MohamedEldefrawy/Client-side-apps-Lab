@@ -1,0 +1,66 @@
+.container {
+    display: grid;
+    margin: auto;
+    height: 100%;
+}
+
+.box
+{
+    display: flex;
+    flex-direction: row;
+    border-bottom: rgb(85, 121, 101) dotted 3px;
+}
+
+.detailsBox
+{
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid red 1px;
+}
+
+.technicalDetailsBox
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.technicalDetailsBox p
+{
+    width: 33%;
+}
+
+.detailsBox p
+{
+    width: 33%;
+}
+#nameAndTitle
+{
+    margin-right: auto;
+    width: 75%;
+}
+#download
+{
+    width: 25%;
+}
+
+#profile,
+#skills,
+#technical,
+#experience
+{
+    width: 25%;
+}
+
+#profileDetails,
+#skillsDetails,
+#technicalDetails,
+#experienceDetails
+{
+    width: 75%;
+}
+
+
+
+
+
+
