@@ -12,9 +12,10 @@
     <div class="container">
 
         <div id="title" class="box">
-            <h1>Register - Create account</h1>
+            <h1 style="color:rgb(57, 102, 77);
+            ;">Register - Create account</h1>
         </div>
-        <div id="warning" class="box">
+        <div id="warning" class="warningBox">
             <p>
                 Fields marked with <span>*</span> are compulsary fields
             </p>
@@ -53,37 +54,70 @@
 
         <div id="formControls" class="formItemsContainer">
             <div id="nameControl" class="formControlsBox">
-                Your Name
+                <input type="text" id="txtName" >
             </div>
             <div id="emailControl" class="formControlsBox">
-                E-Mail ID
+                <input type="email" id="txtEmail">
             </div>
             <div id="alternateEmailControl" class="formControlsBox">
-                Alternate E-Mail ID
+                <input type="email" id="txtAltEmail">
             </div>
+
             <div id="phoneControl" class="formControlsBox">
-                Your Phone
+
+                <div class="phoneControlBox" style="width: 10%;">
+                        Country Code
+                    <div>
+                        <input type="text" id="txtCountryCode"/> 
+                        <span>-&nbsp;</span>
+                    </div>
+                </div>
+                    
+                <div class="phoneControlBox" style="width: 8%;">
+                        City Code
+                    <div>
+                        <input type="text" id="txtCityCode"/>
+                        <span>- &nbsp;</span>
+                    </div>
+                </div>
+                    
+                <div class="phoneControlBox" style="width: 60%;">
+                        Phone number
+                    <div>
+                        <input type="text" id="txtPhoneNumber"/>
+                    </div>
+                </div>        
             </div>
+
             <div id="mobileControl" class="formControlsBox">
-                Your Mobile
+                <input type="tel" id="txtMobileNumber">
             </div>
             <div id="postalAddressControl" class="formControlsBox">
-                Your Postal Address
+                <input type="text" id="txtPostalAddress">
             </div>
             <div id="countryControl" class="formControlsBox">
-                Your Country
+                <select id="dropDownCountry">
+                    <option value="" style="text-align: center;"> ---------------------------------------- Select one ----------------------------------------</option>
+                  </select>
             </div>
             <div id="passwordControl" class="formControlsBox">
-                Password
+                <input type="password" id="txtPassword">
             </div>
 
             <div id="confirmPasswordControl" class="formControlsBox">
-                Re-Enter Password
+                <input type="password" id="txtPasswordConfirmation">
             </div>            
         </div>
         
-        <div id="submit" class="box">
-
+        <div id="submit" class="submitBox">
+            <div>
+                <input type="checkbox" id="chechTerms" value="1"> 
+                <span> I accept the <a href="#">Terms of use</a></span> 
+            </div>
+            <div>
+             <Button id="btnSubmit">Continue > ></Button>
+             <Button id="btnReset">Reset</Button>
+            </div>
         </div>
     </div>
     
