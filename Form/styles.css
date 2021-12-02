@@ -40,6 +40,10 @@ body
     ;
 }
 
+.astric
+{
+    color: red;
+}
 .box
 {
     display: flex;
