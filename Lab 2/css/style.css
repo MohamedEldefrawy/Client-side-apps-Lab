@@ -1,0 +1,160 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+            'upper-nav'
+            'lower-nav'
+            'carousel'
+            'info'
+            'footer';
+}
+
+.upper-nav {
+    grid-area: upper-nav;
+    overflow: hidden;
+    background-color: black;
+}
+
+a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.lower-nav {
+    grid-area: lower-nav;
+    overflow: hidden;
+    background-color: #5e5a5a;
+    width: 65%;
+    margin: auto
+}
+
+.lower-nav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.slideshow-container {
+    grid-area: carousel;
+    width: 55%;
+    min-height: 400px;
+    position: relative;
+    z-index: -1;
+    background-image: url("../imgs/mountains.jpg");;
+    margin: auto;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.data {
+    grid-area: info;
+    width: 55%;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: #5e5a5a;
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+a:hover {
+    color: gray;
+}
+
+.logo {
+    top: 35px;
+    position: absolute;
+}
+
+.logo img {
+    width: 100px;
+    height: 100px;
+}
+
+.header-text {
+    font-weight: bolder;
+    font-size: 50pt;
+    padding: 25px;
+    margin: auto;
+}
+
+.break-line {
+    width: 50%;
+    margin: auto;
+}
+
+.slideshow_navigator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.card-box {
+    display: flex;
+    width: 33%;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+}
+
+
+.footer-nav-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: auto;
+}
+
+.footer-social-icons {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    margin: auto;
+    grid-gap: 30px;
+}
+
+.vl {
+    border-left: 1px solid gray;
+    margin: 25px;
+}
+
+.v2 {
+    border-left: 1px solid black;
+    margin: 25px;
+}
+
+.tweets {
+    background-color: black;
+    margin: 10px;
+    padding: 10px;
+
+}
+
