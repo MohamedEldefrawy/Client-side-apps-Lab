@@ -1,0 +1,51 @@
+body {
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    width: 11%;
+    margin: auto;
+    grid-template-columns: 1fr;
+    border: 5px solid #40a3f6;
+}
+
+
+#calculatorBody {
+    width: 100%;
+}
+
+#buttonsContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+#screen {
+    height: 50px;
+    color: #15627e;
+    font-weight: bolder;
+    font-size: 35px;
+    padding: 10px;
+}
+
+#opScreen {
+    height: 25px;
+    color: #bbbbbb;
+    padding: 10px;
+}
+
+.btnNumber {
+    width: 50px;
+    height: 50px;
+}
+
+.btnOperation {
+    width: 50px;
+    height: 50px;
+}
+
+#btnZero {
+    width: 100px;
+}
