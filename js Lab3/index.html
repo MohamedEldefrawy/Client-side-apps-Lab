@@ -9,34 +9,34 @@
 <div class="container">
 
     <div id="screen">
-        Screen
+        0
     </div>
 
     <div id="opScreen">
-        Operation
+
     </div>
 
     <section id="calculatorBody">
         <section id="buttonsContainer">
-            <button class="btnOperation">C</button>
-            <button class="btnOperation">+/-</button>
-            <button class="btnOperation">%</button>
-            <button class="btnOperation">/</button>
-            <button class="btnNumber">7</button>
-            <button class="btnNumber">8</button>
-            <button class="btnNumber">9</button>
-            <button class="btnOperation">*</button>
-            <button class="btnNumber">4</button>
-            <button class="btnNumber">5</button>
-            <button class="btnNumber">6</button>
-            <button class="btnOperation">+</button>
-            <button class="btnNumber">1</button>
-            <button class="btnNumber">2</button>
-            <button class="btnNumber">3</button>
-            <button class="btnOperation">-</button>
-            <button id="btnZero" class="btnNumber">0</button>
-            <button class="btnNumber">.</button>
-            <button class="btnOperation">=</button>
+            <button class="btnOperation" onclick="btnClearClicked()">C</button>
+            <button class="btnOperation" onclick="btnOpClicked('+/-')">+/-</button>
+            <button class="btnOperation" onclick="btnOpClicked('%')">%</button>
+            <button class="btnOperation" onclick="btnOpClicked('/')">/</button>
+            <button class="btnNumber" onclick="btnNumberClicked('7')">7</button>
+            <button class="btnNumber" onclick="btnNumberClicked('8')">8</button>
+            <button class="btnNumber" onclick="btnNumberClicked('9')">9</button>
+            <button class="btnOperation" onclick="btnOpClicked('*')">*</button>
+            <button class="btnNumber" onclick="btnNumberClicked('4')">4</button>
+            <button class="btnNumber" onclick="btnNumberClicked('5')">5</button>
+            <button class="btnNumber" onclick="btnNumberClicked('6')">6</button>
+            <button class="btnOperation" onclick="btnOpClicked('+')">+</button>
+            <button class="btnNumber" onclick="btnNumberClicked('1')">1</button>
+            <button class="btnNumber" onclick="btnNumberClicked('2')">2</button>
+            <button class="btnNumber" onclick="btnNumberClicked('3')">3</button>
+            <button class="btnOperation" onclick="btnOpClicked('-')">-</button>
+            <button id="btnZero" class="btnNumber" onclick="btnNumberClicked('0')">0</button>
+            <button class="btnNumber" onclick="btnDotClicked()">.</button>
+            <button class="btnOperation" onclick="btnEqualClicked()">=</button>
         </section>
 
     </section>
