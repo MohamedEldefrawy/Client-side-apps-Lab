@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Login form</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/login.js"></script>
 </head>
 <body>
 <div id="Login-form-container">
     <input type="text" id="TxtUser" placeholder="username" class="text-input">
     <input type="password" id="TxtPassword" placeholder="password" class="text-input">
-    <input type="button" id="btnLogin" class="btn-login" value="Login">
+    <input type="button" id="BtnLogin" class="btn-login" value="Login" onclick="btnLoginClicked(this)">
     <div id="Create-account">
         <span class="not-registered-text">Not registered?</span><a class="create-account-link"> Create account</a>
     </div>
+    <div id="Messages">
+        <p id="WelcomeText">Welcome</p>
+        <p id="WrongCredentialText">Wrong credentials</p>
+    </div>
 </div>
 </body>
+<script src="js/login.js"></script>
+
 </html>
