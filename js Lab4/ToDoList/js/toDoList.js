@@ -10,8 +10,8 @@ function btnAddTaskClick() {
         <div class="task">
             <div class="task-body">` + txtTaskName.value + `</div>
             <div class="task-controls">
-                <a class="btn-done"><i class="fas fa-check"></i></a>
-                <a class="btn-remove"><i class="fas fa-trash-alt"></i></a>
+                <a class="btn-done" onclick="btnDoneClicked(event)"><i class="fas fa-check"></i></a>
+                <a class="btn-remove" onclick="btnDeleteClicked(event)"><i class="fas fa-trash-alt"></i></a>
             </div>
         </div>`;
 
@@ -19,7 +19,14 @@ function btnAddTaskClick() {
     txtTaskName.value = "";
 }
 
-function btnDoneClicked()
-{
-    d
+function btnDoneClicked(event) {
+    var task = event.currentTarget.parentElement.previousElementSibling;
+    task.classList.toggle("finished-task");
+
+}
+
+function btnDeleteClicked(event) {
+    var task = event.currentTarget.parentElement.parentElement;
+    tasksSection.removeChild(task);
+    event.stopPropagation();
 }
