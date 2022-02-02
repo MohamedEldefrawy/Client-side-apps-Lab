@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/fontawesome.min.js"></script>
     <link rel="stylesheet" href="css/all.css">
-    <script src="js/all.js"></script>
 </head>
 <body>
 <div class="container">
@@ -33,7 +32,7 @@
                     </div>
                     <div class="set-min set-alarm-box">
                         <div>
-                            <span>Hours</span>
+                            <span>Minutes</span>
                         </div>
                         <div>
                             <input id="txtMin" type="number" value="0" min="0">
@@ -41,7 +40,7 @@
                     </div>
                     <div class="set-sec set-alarm-box">
                         <div>
-                            <span>Hours</span>
+                            <span>Seconds</span>
                         </div>
                         <div>
                             <input id="txtSec" type="number" value="0" min="0">
@@ -63,20 +62,20 @@
         <section id="Alarm-body">
             <section id="Screen">
                 <section class="days-box days">
-                    <span class="day-selected day">SAT</span>
-                    <span class="day">SUN</span>
-                    <span class="day">MON</span>
-                    <span class="day">TUE</span>
-                    <span class="day">WED</span>
-                    <span class="day">THU</span>
-                    <span class="day">FRI</span>
+                    <span id="SAT" class="day">SAT</span>
+                    <span id="SUN" class="day">SUN</span>
+                    <span id="MON" class="day">MON</span>
+                    <span id="TUE" class="day">TUE</span>
+                    <span id="WEN" class="day">WED</span>
+                    <span id="THU" class="day">THU</span>
+                    <span id="FRI" class="day">FRI</span>
                 </section>
                 <section id="Clock">
-                    <span id="Hrs">12</span>:<span id="Min">00</span>:<span id="Sec">00</span>
+                    <span id="Hrs">00</span>:<span id="Min">00</span>:<span id="Sec">00</span>
                 </section>
                 <section class="alarm-notifications">
-                    <i class="fas fa-bell"></i>
-                    <span id="Am" class="notification-selected">AM</span>
+                    <span id="AlarmEnabled"><i class="fas fa-bell"></i></span>
+                    <span id="Am">AM</span>
                     <span id="Pm">PM</span>
                 </section>
             </section>
@@ -94,4 +93,5 @@
 
 </body>
 <script src="js/Alarm.js"></script>
+<script src="js/all.js"></script>
 </html>
