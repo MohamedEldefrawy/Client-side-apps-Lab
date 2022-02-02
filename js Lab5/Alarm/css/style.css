@@ -4,6 +4,11 @@
     font-family: digital;
 }
 
+@font-face {
+    src: url("../fonts/GreatVibes-Regular.ttf");
+    font-family: brand;
+}
+
 /* layout design  */
 
 body {
@@ -24,19 +29,20 @@ body {
 .first-row {
     grid-row: 1;
     width: 100%;
-    height: 10%;
+    height: 5%;
 }
 
 .second-row {
     grid-row: 2;
     width: 100%;
-    height: 40%;
+    height: 45%;
 }
 
 .third-row {
     grid-row: 3;
     width: 100%;
-    height: 10%;
+    height: 15%;
+    text-align: center;
 }
 
 .fourth-row {
@@ -101,6 +107,11 @@ body {
     color: black;
 }
 /*Alarm text */
-
+.brand {
+    color: #8b9aa6;
+    font-family: brand;
+    font-weight: bold;
+    font-size: 50pt;
+}
 
 /*Set alarm form*/
