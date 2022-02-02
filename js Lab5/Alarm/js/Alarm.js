@@ -2,7 +2,7 @@
 var modal = document.getElementById("setAlarmModal");
 
 // Get the button that opens the modal
-var btn = document.getElementById("btnSetAlarm");
+var btn = document.getElementById("btnOpenSetAlarmDialog");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];

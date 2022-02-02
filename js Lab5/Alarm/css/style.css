@@ -116,6 +116,7 @@ body {
     font-size: 50pt;
 }
 
+#btnOpenSetAlarmDialog,
 #btnSetAlarm {
     border: 0;
     color: white;
@@ -125,8 +126,21 @@ body {
     cursor: pointer;
 }
 
+#btnClear {
+    border: 0;
+    color: white;
+    background-color: #f8a5b4;
+    width: 120px;
+    height: 70px;
+    cursor: pointer;
+}
+
 #btnSetAlarm:active {
     background-color: #29bfef;
+}
+#btnClear:active
+{
+    background-color: #f13a57;
 }
 
 /*Set alarm modal*/
@@ -151,10 +165,11 @@ body {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
 }
 
 /* The Close Button */
+
 .close {
     color: #aaaaaa;
     float: right;
@@ -167,4 +182,39 @@ body {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.set-alarm-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    color: #5b5756;
+}
+
+.set-alarm-box {
+    width: 33%;
+    height: 100%;
+    background-color: #f4f4f4;
+    margin: 25px;
+    padding: 15px;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+}
+
+
+.setAlarm-buttons {
+    text-align: center;
+}
+
+#txtHrs,
+#txtMin,
+#txtSec {
+    height: 60px;
+    text-align: center;
 }

@@ -18,7 +18,41 @@
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <div class="form-container">
+                <section class="form-header">
+                    <span>Set Alarm After</span>
+                </section>
+                <section class="set-alarm-container">
+                    <div class="set-hrs set-alarm-box">
+                        <div>
+                            <span>Hours</span>
+                        </div>
+                        <div>
+                            <input id="txtHrs" type="number" value="0" min="0">
+                        </div>
+                    </div>
+                    <div class="set-min set-alarm-box">
+                        <div>
+                            <span>Hours</span>
+                        </div>
+                        <div>
+                            <input id="txtMin" type="number" value="0" min="0">
+                        </div>
+                    </div>
+                    <div class="set-sec set-alarm-box">
+                        <div>
+                            <span>Hours</span>
+                        </div>
+                        <div>
+                            <input id="txtSec" type="number" value="0" min="0">
+                        </div>
+                    </div>
+                </section>
+                <section class="setAlarm-buttons">
+                    <input id="btnSetAlarm" type="button" value="Set"/>
+                    <input id="btnClear" type="button" value="CLear"/>
+                </section>
+            </div>
         </div>
     </div>
 
@@ -54,7 +88,7 @@
     </div>
 
     <div class="fourth-row">
-        <input type="button" value="Set Alarm" id="btnSetAlarm">
+        <input type="button" value="Set Alarm" id="btnOpenSetAlarmDialog">
     </div>
 </div>
 
