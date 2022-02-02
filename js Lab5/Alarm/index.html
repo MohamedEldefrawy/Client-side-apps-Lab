@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alarm</title>
-    <link href="css/style.css" rel="stylesheet">
-    <script src="js/Alarm.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alarm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/fontawesome.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/all.js"></script>
 </head>
 <body>
 <div class="container">
@@ -27,6 +30,11 @@
                 <section id="Clock">
                     <span id="Hrs">12</span>:<span id="Min">00</span>:<span id="Sec">00</span>
                 </section>
+                <section class="alarm-notifications">
+                    <i class="fas fa-bell"></i>
+                    <span id="Am" class="notification-selected">AM</span>
+                    <span id="Pm">PM</span>
+                </section>
             </section>
         </section>
     </div>
@@ -41,4 +49,5 @@
 </div>
 
 </body>
+<script src="js/Alarm.js"></script>
 </html>
