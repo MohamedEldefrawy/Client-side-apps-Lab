@@ -1,0 +1,96 @@
+/* Link fonts*/
+@font-face {
+    src: url("../fonts/DIGITALDREAM.ttf");
+    font-family: digital;
+}
+
+/* layout design  */
+
+body {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #dce4e7;
+    min-width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+
+.first-row {
+    grid-row: 1;
+    width: 100%;
+    height: 10%;
+}
+
+.second-row {
+    grid-row: 2;
+    width: 100%;
+    height: 40%;
+}
+
+.third-row {
+    grid-row: 3;
+    width: 100%;
+    height: 10%;
+}
+
+.fourth-row {
+    grid-row: 4;
+    width: 100%;
+    height: 40%;
+}
+
+/* Alarm body*/
+#Alarm-body {
+    background-color: #f3f3f3;
+    height: 100%;
+    padding: 50px;
+}
+
+#Screen {
+    display: flex;
+    background-color: #dddddd;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Clock {
+    font-weight: bold;
+    font-size: 60pt;
+    height: 75%;
+    font-family: digital;
+    color: #43444a;
+}
+
+.days-box {
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+}
+
+.days {
+    color: #8a8a8e;
+}
+
+.day-selected {
+    color: black;
+    font-weight: bold;
+}
+
+.day {
+    margin: 20px;
+}
+
+
+/*Alarm text */
+
+
+/*Set alarm form*/
