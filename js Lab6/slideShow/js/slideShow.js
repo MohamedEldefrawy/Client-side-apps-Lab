@@ -4,8 +4,9 @@ var selectedImage;
 var nextImage;
 var prevImage;
 var images = document.getElementsByClassName("image");
+var imagesArea = document.getElementById("imagesArea");
 
-btnNext.addEventListener("click", function () {
+function showNextImage() {
     nextImage = document.getElementsByClassName("next").item(0);
     prevImage = document.getElementsByClassName("prev").item(0);
     selectedImage = document.getElementsByClassName("selected").item(0);
@@ -18,9 +19,9 @@ btnNext.addEventListener("click", function () {
 
     prevImage.classList.remove("prev");
     prevImage.classList.add("next");
-});
+}
 
-btnPrev.addEventListener("click", function () {
+function showPrevImage() {
     nextImage = document.getElementsByClassName("next").item(0);
     prevImage = document.getElementsByClassName("prev").item(0);
     selectedImage = document.getElementsByClassName("selected").item(0);
@@ -33,4 +34,22 @@ btnPrev.addEventListener("click", function () {
 
     prevImage.classList.remove("prev");
     prevImage.classList.add("selected");
+}
+
+btnNext.addEventListener("click", function () {
+    showNextImage();
+
+});
+
+
+btnPrev.addEventListener("click", function () {
+    showPrevImage();
+});
+
+imagesArea.addEventListener("click", function (element) {
+    if (element.target.classList.contains("prev")) {
+        showPrevImage();
+    } else if (element.target.classList.contains("next")) {
+        showNextImage();
+    }
 });
