@@ -5,6 +5,7 @@ var nextImage;
 var prevImage;
 var images = document.getElementsByClassName("image");
 var imagesArea = document.getElementById("imagesArea");
+var tilesArea = document.getElementById("tilesArea");
 
 function showNextImage() {
     nextImage = document.getElementsByClassName("next").item(0);
@@ -19,6 +20,8 @@ function showNextImage() {
 
     prevImage.classList.remove("prev");
     prevImage.classList.add("next");
+
+
 }
 
 function showPrevImage() {
@@ -38,12 +41,13 @@ function showPrevImage() {
 
 btnNext.addEventListener("click", function () {
     showNextImage();
-
+    switchToNextTileButtons();
 });
 
 
 btnPrev.addEventListener("click", function () {
     showPrevImage();
+    switchToPrevTileButtons();
 });
 
 imagesArea.addEventListener("click", function (element) {
@@ -53,3 +57,30 @@ imagesArea.addEventListener("click", function (element) {
         showNextImage();
     }
 });
+
+
+tilesArea.addEventListener("click", function (element) {
+
+});
+
+
+function switchToNextTileButtons() {
+    var activeTile = document.getElementsByClassName("active-tile").item(0);
+    activeTile.classList.toggle("active-tile");
+    if (activeTile.nextElementSibling)
+        activeTile.nextElementSibling.classList.toggle("active-tile");
+    else {
+        activeTile.parentElement.firstElementChild.classList.toggle("active-tile");
+    }
+}
+
+
+function switchToPrevTileButtons() {
+    var activeTile = document.getElementsByClassName("active-tile").item(0);
+    activeTile.classList.toggle("active-tile");
+    if (activeTile.previousElementSibling)
+        activeTile.previousElementSibling.classList.toggle("active-tile");
+    else {
+        activeTile.parentElement.lastElementChild.classList.toggle("active-tile");
+    }
+}
