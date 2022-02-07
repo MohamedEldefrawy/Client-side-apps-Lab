@@ -6,6 +6,7 @@ var prevImage;
 var images = document.getElementsByClassName("image");
 var imagesArea = document.getElementById("imagesArea");
 var tilesArea = document.getElementById("tilesArea");
+var tileButtons = document.getElementsByClassName("btn-tiles");
 
 function showNextImage() {
     nextImage = document.getElementsByClassName("next").item(0);
@@ -60,6 +61,9 @@ imagesArea.addEventListener("click", function (element) {
 
 
 tilesArea.addEventListener("click", function (element) {
+    var clickedTile = element.target.closest("button");
+    var selectedTile = document.getElementsByClassName("active-tile").item(0).classList.remove("active-tile");
+
 
 });
 

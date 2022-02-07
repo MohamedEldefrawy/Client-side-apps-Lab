@@ -19,12 +19,16 @@
 .prev {
     width: 500px;
     height: 500px;
+    transition-duration: 1000ms;
+    transition-property:  width, height;
     order: 1;
 }
 
 .next {
     width: 500px;
     height: 500px;
+    transition-duration: 1000ms;
+    transition-property: width, height;
     order: 3;
 }
 
@@ -35,6 +39,8 @@
 .selected {
     width: 600px;
     height: 600px;
+    transition-duration: 1000ms;
+    transition-property:  width, height;
     order: 2;
 }
 
