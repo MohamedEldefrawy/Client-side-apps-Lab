@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login form</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="Login-form-container">
+    <label for="TxtUser"></label><input type="text" id="TxtUser" placeholder="username" class="text-input">
+    <label for="TxtPassword"></label><input type="password" id="TxtPassword" placeholder="password" class="text-input">
+    <input type="button" id="BtnLogin" class="btn-login" value="Login" onclick="btnLoginClicked(this)">
+    <div id="Create-account">
+        <span class="not-registered-text">Not registered?</span><a class="create-account-link"> Create account</a>
+    </div>
+    <div id="Messages">
+        <p id="WelcomeText"></p>
+        <p id="WrongCredentialText"></p>
+    </div>
+</div>
+</body>
+<script src="js/login.js"></script>
+
+</html>
