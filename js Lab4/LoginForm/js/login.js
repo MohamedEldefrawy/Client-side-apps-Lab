@@ -5,21 +5,22 @@ var welcomeText = document.getElementById("WelcomeText");
 var wrongCredentialsText = document.getElementById("WrongCredentialText");
 
 
-function btnLoginClicked(event) {
-    var loginResult = credentialsValidation();
+btnLogin.addEventListener("click",
+    async function () {
+        var loginResult = await credentialsValidation();
 
-    if (loginResult == "Done...") {
-        welcomeText.style.display = "block";
-        welcomeText.innerText = loginResult;
-        wrongCredentialsText.style.display = "none";
-    } else {
-        wrongCredentialsText.innerText = loginResult;
-        welcomeText.style.display = "none";
-        wrongCredentialsText.style.display = "block";
-    }
-}
+        if (loginResult == "Done...") {
+            welcomeText.style.display = "block";
+            welcomeText.innerText = loginResult;
+            wrongCredentialsText.style.display = "none";
+        } else {
+            wrongCredentialsText.innerText = loginResult;
+            welcomeText.style.display = "none";
+            wrongCredentialsText.style.display = "block";
+        }
+    });
 
-function credentialsValidation() {
+async function credentialsValidation() {
     var message;
 
     if (txtUserName.value == "") {
@@ -27,7 +28,7 @@ function credentialsValidation() {
     } else if (txtPasswordName.value == "") {
         message = "please Enter valid password";
     } else {
-        var isLoggedIn = login();
+        var isLoggedIn = await login();
         console.log(isLoggedIn)
         if (isLoggedIn) {
             message = "Done...";
@@ -39,12 +40,15 @@ function credentialsValidation() {
 }
 
 async function login() {
+
     var result = false;
+
     var request =
         {
             "email": txtUserName.value,
             "password": txtPasswordName.value
         }
+
     await fetch("https://reqres.in/api/login", {
         method: "post",
         body: JSON.stringify(request),
@@ -53,9 +57,9 @@ async function login() {
         }
     }).then(function (response) {
         if (response.status === 200) {
+            localStorage.token = response.token;
             console.log("request after success ", response)
             result = true;
-            localStorage.token = response.token;
         } else if (response.status === 400) {
             console.log("request after success ", response)
             result = false;
