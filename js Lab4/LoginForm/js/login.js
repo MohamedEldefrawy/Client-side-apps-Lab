@@ -1,27 +1,25 @@
 var btnLogin = document.getElementById("BtnLogin");
 var txtUserName = document.getElementById("TxtUser");
 var txtPasswordName = document.getElementById("TxtPassword");
-var username = "admin";
-var password = "123";
 var welcomeText = document.getElementById("WelcomeText");
 var wrongCredentialsText = document.getElementById("WrongCredentialText");
 
 
 function btnLoginClicked(event) {
-    var result = credentialsValidation();
+    var loginResult = credentialsValidation();
 
-    if (result == "Done...") {
+    if (loginResult == "Done...") {
         welcomeText.style.display = "block";
-        welcomeText.innerText = result;
+        welcomeText.innerText = loginResult;
         wrongCredentialsText.style.display = "none";
     } else {
-        wrongCredentialsText.innerText = result;
+        wrongCredentialsText.innerText = loginResult;
         welcomeText.style.display = "none";
         wrongCredentialsText.style.display = "block";
     }
 }
 
-async function credentialsValidation() {
+function credentialsValidation() {
     var message;
 
     if (txtUserName.value == "") {
@@ -29,9 +27,9 @@ async function credentialsValidation() {
     } else if (txtPasswordName.value == "") {
         message = "please Enter valid password";
     } else {
-        var loginResult = await login();
-        console.log(loginResult)
-        if (loginResult) {
+        var isLoggedIn = login();
+        console.log(isLoggedIn)
+        if (isLoggedIn) {
             message = "Done...";
         } else {
             message = "Wrong username or password";
@@ -42,26 +40,25 @@ async function credentialsValidation() {
 
 async function login() {
     var result = false;
-
-    var request = {
-        "email": "eve.holt@reqres.in",
-        "password": "cityslicka"
-    }
-    var failRequest =
+    var request =
         {
-            "email": "peter@klaven"
+            "email": txtUserName.value,
+            "password": txtPasswordName.value
         }
-
     await fetch("https://reqres.in/api/login", {
         method: "post",
-        body: JSON.stringify(request)
+        body: JSON.stringify(request),
+        headers: {
+            "content-type": "application/json"
+        }
     }).then(function (response) {
         if (response.status === 200) {
+            console.log("request after success ", response)
             result = true;
             localStorage.token = response.token;
         } else if (response.status === 400) {
+            console.log("request after success ", response)
             result = false;
-            console.log(response.error)
         }
     }).catch(function (error) {
         console.log(error);
