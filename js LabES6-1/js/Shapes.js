@@ -25,18 +25,20 @@ class Rectangle extends Shape {
 
     constructor(shape = undefined, x = 0, y = 0, height = 0, width = 0) {
 
-        if (typeof shape === 'undefined') {
-            super(x, y);
-            this.height = height;
-            this.width = width;
-        } else if (shape.constructor.name === "Shape") {
-            super(shape.x, shape.y);
-            this.height = height;
-            this.width = width;
-        } else if (shape.constructor.name === "Rectangle") {
-            super(shape.x, shape.y);
-            this.height = shape.height;
-            this.width = shape.width;
+        if (arguments.length == 1) {
+            if (shape.constructor.name === "Shape") {
+                super(shape.x, shape.y);
+                this.height = height;
+                this.width = width;
+            } else if (shape.constructor.name === "Rectangle") {
+                super(shape.x, shape.y);
+                this.height = shape.height;
+                this.width = shape.width;
+            }
+        } else {
+            super(arguments[0], arguments[1]);
+            this.height = arguments[2];
+            this.width = arguments[3];
         }
     }
 
@@ -53,15 +55,17 @@ class Square extends Rectangle {
     length = 1;
 
     constructor(shape = undefined, x = 0, y = 0, length = 0) {
-        if (typeof shape === 'undefined') {
-            super(undefined, x, y, length, length);
-            this.length = length;
-        } else if (shape.constructor.name === "Shape") {
-            super(shape.x, shape.y, length, length);
-            this.length = length;
-        } else if (shape.constructor.name === "Square") {
-            super(shape.x, shape.y, shape.length, shape.length);
-            this.length = shape.length;
+        if (arguments.length == 1 || arguments.length == 2) {
+            if (shape.constructor.name === "Shape") {
+                super(shape.x, shape.y, arguments[1], arguments[1]);
+                this.length = arguments[1];
+            } else if (shape.constructor.name === "Square") {
+                super(shape.x, shape.y, shape.length, shape.length);
+                this.length = shape.length;
+            }
+        } else {
+            super(arguments[0], arguments[1], arguments[2], arguments[2]);
+            this.length = arguments[2];
         }
     }
 
@@ -125,8 +129,8 @@ class DrawArea {
 
 
 let shapes = [
-    new Rectangle(new Rectangle(undefined, 0, 0, 10, 5)),
-    new Square(undefined, 0, 0, 5),
+    new Rectangle(new Rectangle(0, 0, 10, 5)),
+    new Square(0, 0, 5),
     new Oval(0, 0, 10, 5),
     new Circle(0, 0, 5)
 ]
