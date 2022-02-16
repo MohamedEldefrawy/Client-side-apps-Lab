@@ -60,12 +60,25 @@ class Rectangle extends Shape {
                 <input value="Circrimference : ${this.getCircumference()}" disabled>
                 <input value="Area : ${this.getArea()}" disabled>
                 <input value="Type : ${this.getType()}" disabled>      
-                <button class="btn-calcArea">Area</button>      
-                <button class="btn-calcCircumference">Circumference</button>      
+                <button class="btn-calcArea">Calculate</button>      
         </div>
-        </section>      
+        </section>            
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+
+        document.querySelector(".rectangle").addEventListener('click', function (event) {
+            let selectedRect = event.target.closest('.rectangle');
+            if (event.target.className === 'btn-calcArea') {
+
+                let newRect = refreshRect({
+                    height: parseInt(document.getElementById("TxtH").value),
+                    width: parseInt(document.getElementById('TxtW').value)
+                });
+
+                shapesArea.removeChild(selectedRect);
+                shapesArea.insertAdjacentHTML('afterbegin', newRect);
+            }
+        });
     };
 }
 
@@ -112,15 +125,14 @@ class Square extends Rectangle {
 
     displayEditor = () => {
         let rectangleHtml = `
-        <section class="rectangle">
-         <div class="data">
+        <section class="square">
+             <div class="data">
                 <input id="TxtL" placeholder="L value">
                 <input value="Circrimference : ${this.getCircumference()}" disabled>
                 <input value="Area : ${this.getArea()}" disabled>
                 <input value="Type : ${this.getType()}" disabled>      
-                <button class="btn-calcArea">Area</button>      
-                <button class="btn-calcCircumference">Circumference</button>      
-        </div>
+                <button class="btn-calcArea">Calculate</button>      
+            </div>
         </section>      
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
@@ -131,10 +143,22 @@ class Oval extends Shape {
     a = 1;
     b = 1;
 
-    constructor(x, y, a, b) {
-        super(x, y);
-        this.a = a;
-        this.b = b;
+    constructor(shapeArgs) {
+        if (shapeArgs.hasOwnProperty('shape')) {
+            if (shapeArgs.constructor.name === "Shape") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y);
+                this.a = shapeArgs.a;
+                this.b = shapeArgs.b;
+            } else if (shapeArgs.constructor.name === "Oval") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y);
+                this.a = shapeArgs.shape.a;
+                this.b = shapeArgs.shape.b;
+            }
+        } else {
+            super(shapeArgs.x, shapeArgs.y);
+            this.a = shapeArgs.a;
+            this.b = shapeArgs.b;
+        }
     }
 
     getCircumference = () => 3.14 * (this.a + this.b);
@@ -150,15 +174,14 @@ class Oval extends Shape {
     displayEditor = () => {
         let rectangleHtml = `
         <section class="oval">
-        <div class="data">
+            <div class="data">
                 <input id="TxtA" placeholder="a value">
                 <input id="TxtB" placeholder="b value">
                 <input value="Circrimference : ${this.getCircumference()}" disabled>
                 <input value="Area : ${this.getArea()}" disabled>
                 <input value="Type : ${this.getType()}" disabled>      
-                <button class="btn-calcArea">Area</button>      
-                <button class="btn-calcCircumference">Circumference</button>      
-        </div>
+                <button class="btn-calcArea">Calculate</button>      
+            </div>
         </section>      
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
@@ -169,9 +192,18 @@ class Oval extends Shape {
 class Circle extends Oval {
     r = 1;
 
-    constructor(x, y, r) {
-        super(x, y, r, r);
-        this.r = r;
+    constructor(shapeArgs) {
+        if (shapeArgs.hasOwnProperty('shape')) {
+            if (shapeArgs.shape.constructor.name === "Shape") {
+                super({shape: shapeArgs.shape, a: shapeArgs.r, b: shapeArgs.r});
+                this.r = shapeArgs.r;
+            } else if (shapeArgs.shape.constructor.name === "Circle") {
+                super({x: shapeArgs.shape.x, y: shapeArgs.shape.y, a: shapeArgs.shape.r, b: shapeArgs.shape.r});
+                this.r = shapeArgs.shape.r;
+            }
+        } else {
+            super({x: shapeArgs.x, y: shapeArgs.y, a: shapeArgs.r, b: shapeArgs.r});
+        }
     }
 
     log() {
@@ -189,8 +221,7 @@ class Circle extends Oval {
                 <input value="Circrimference : ${this.getCircumference()}" disabled>
                 <input value="Area : ${this.getArea()}" disabled>
                 <input value="Type : ${this.getType()}" disabled>      
-                <button class="btn-calcArea">Area</button>      
-                <button class="btn-calcCircumference">Circumference</button>      
+                <button class="btn-calcArea">Calculate</button>      
         </div>
         </section>      
       `
@@ -206,6 +237,10 @@ class DrawArea {
         this.shapes = shapes;
     }
 
+    getShapes() {
+        return this.shapes;
+    }
+
     logShapes() {
         for (const shape of this.shapes) {
             shape.log();
@@ -217,8 +252,37 @@ class DrawArea {
             shape.displayEditor();
         }
     }
+
+    renderShape(shape) {
+        shape.displayEditor();
+    }
 }
 
+
+function refreshRect(userInput) {
+
+    let rect = drawArea.getShapes()[0];
+
+    if (userInput.hasOwnProperty('height') && userInput.hasOwnProperty('width')) {
+        rect.height = userInput.height;
+        rect.width = userInput.width;
+    }
+
+    let rectangleHtml = `
+        <section class="rectangle">
+         <div class="data">
+                <input id="TxtH" placeholder="H value">
+                <input id="TxtW" placeholder="W value">
+                <input value="Circrimference : ${rect.getCircumference()}" disabled>
+                <input value="Area : ${rect.getArea()}" disabled>
+                <input value="Type : ${rect.getType()}" disabled>      
+                <button class="btn-calcArea">Calculate</button>      
+        </div>
+        </section>            
+      `;
+
+    return rectangleHtml;
+}
 
 let shapes = [
     new Rectangle(
@@ -241,8 +305,8 @@ let shapes = [
             }
         )
     }),
-    new Oval(0, 0, 10, 5),
-    new Circle(0, 0, 5)
+    new Oval({x: 0, y: 0, a: 10, b: 5}),
+    new Circle({x: 0, y: 0, r: 5})
 ]
 
 let drawArea = new DrawArea();
