@@ -54,18 +54,19 @@ class Rectangle extends Shape {
 class Square extends Rectangle {
     length = 1;
 
-    constructor(shape = undefined, x = 0, y = 0, length = 0) {
-        if (arguments.length == 1 || arguments.length == 2) {
-            if (shape.constructor.name === "Shape") {
-                super(shape.x, shape.y, arguments[1], arguments[1]);
-                this.length = arguments[1];
-            } else if (shape.constructor.name === "Square") {
-                super(shape.x, shape.y, shape.length, shape.length);
-                this.length = shape.length;
+    constructor(shapeArgs) {
+
+        if (typeof shapeArgs.shape !== 'undefined') {
+            if (shapeArgs.shape.constructor.name === "Shape") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y, shapeArgs.length, shapeArgs.length);
+                this.length = shapeArgs.shape.length;
+            } else if (shapeArgs.shape.constructor.name === "Square") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y, shapeArgs.shape.length, shapeArgs.shape.length);
+                this.length = shapeArgs.shape.length;
             }
         } else {
-            super(arguments[0], arguments[1], arguments[2], arguments[2]);
-            this.length = arguments[2];
+            super(shapeArgs.x, shapeArgs.y, shapeArgs.length, shapeArgs.length);
+            this.length = shapeArgs.length;
         }
     }
 
@@ -130,7 +131,9 @@ class DrawArea {
 
 let shapes = [
     new Rectangle(new Rectangle(0, 0, 10, 5)),
-    new Square(0, 0, 5),
+    new Square({
+        shape: new Square({x: 0, y: 1, length: 5})
+    }),
     new Oval(0, 0, 10, 5),
     new Circle(0, 0, 5)
 ]
