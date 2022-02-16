@@ -25,22 +25,21 @@ class Rectangle extends Shape {
     height = 1;
     width = 1;
 
-    constructor(shape = undefined, x = 0, y = 0, height = 0, width = 0) {
-
-        if (arguments.length == 1) {
-            if (shape.constructor.name === "Shape") {
-                super(shape.x, shape.y);
-                this.height = height;
-                this.width = width;
-            } else if (shape.constructor.name === "Rectangle") {
-                super(shape.x, shape.y);
-                this.height = shape.height;
-                this.width = shape.width;
+    constructor(shapeArgs) {
+        if (typeof shapeArgs.shape !== 'undefined') {
+            if (shapeArgs.shape.constructor.name === "Shape") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y);
+                this.height = shapeArgs.height;
+                this.width = shapeArgs.width;
+            } else if (shapeArgs.shape.constructor.name === "Rectangle") {
+                super(shapeArgs.shape.x, shapeArgs.shape.y);
+                this.height = shapeArgs.shape.height;
+                this.width = shapeArgs.shape.width;
             }
         } else {
-            super(arguments[0], arguments[1]);
-            this.height = arguments[2];
-            this.width = arguments[3];
+            super(shapeArgs.x, shapeArgs.y);
+            this.height = shapeArgs.height;
+            this.width = shapeArgs.height;
         }
     }
 
