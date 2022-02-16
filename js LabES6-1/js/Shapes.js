@@ -26,7 +26,7 @@ class Rectangle extends Shape {
     width = 1;
 
     constructor(shapeArgs) {
-        if (typeof shapeArgs.shape !== 'undefined') {
+        if (shapeArgs.hasOwnProperty('shape')) {
             if (shapeArgs.shape.constructor.name === "Shape") {
                 super(shapeArgs.shape.x, shapeArgs.shape.y);
                 this.height = shapeArgs.height;
@@ -74,16 +74,32 @@ class Square extends Rectangle {
 
     constructor(shapeArgs) {
 
-        if (typeof shapeArgs.shape !== 'undefined') {
+        if (shapeArgs.hasOwnProperty('shape')) {
             if (shapeArgs.shape.constructor.name === "Shape") {
-                super(shapeArgs.shape.x, shapeArgs.shape.y, shapeArgs.length, shapeArgs.length);
-                this.length = shapeArgs.shape.length;
+                super({
+                    x: shapeArgs.shape.x,
+                    y: shapeArgs.shape.y,
+                    height: shapeArgs.length,
+                    width: shapeArgs.length
+                });
+                this.length = shapeArgs.length;
             } else if (shapeArgs.shape.constructor.name === "Square") {
-                super(shapeArgs.shape.x, shapeArgs.shape.y, shapeArgs.shape.length, shapeArgs.shape.length);
+                super({
+                    x: shapeArgs.shape.x,
+                    y: shapeArgs.shape.y,
+                    height: shapeArgs.shape.length,
+                    width: shapeArgs.shape.length
+                });
+
                 this.length = shapeArgs.shape.length;
             }
         } else {
-            super(shapeArgs.x, shapeArgs.y, shapeArgs.length, shapeArgs.length);
+            super({
+                x: shapeArgs.x,
+                y: shapeArgs.y,
+                height: shapeArgs.length,
+                width: shapeArgs.length
+            });
             this.length = shapeArgs.length;
         }
     }
@@ -205,9 +221,25 @@ class DrawArea {
 
 
 let shapes = [
-    new Rectangle(new Rectangle(0, 0, 10, 5)),
+    new Rectangle(
+        {
+            shape: new Rectangle(
+                {
+                    x: 0,
+                    y: 0,
+                    height: 10,
+                    width: 5
+                }
+            )
+        }),
     new Square({
-        shape: new Square({x: 0, y: 1, length: 5})
+        shape: new Square(
+            {
+                x: 0,
+                y: 0,
+                length: 5
+            }
+        )
     }),
     new Oval(0, 0, 10, 5),
     new Circle(0, 0, 5)
