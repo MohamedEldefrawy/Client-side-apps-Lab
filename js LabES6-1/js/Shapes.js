@@ -86,7 +86,6 @@ class Square extends Rectangle {
     length = 1;
 
     constructor(shapeArgs) {
-
         if (shapeArgs.hasOwnProperty('shape')) {
             if (shapeArgs.shape.constructor.name === "Shape") {
                 super({
@@ -103,7 +102,6 @@ class Square extends Rectangle {
                     height: shapeArgs.shape.length,
                     width: shapeArgs.shape.length
                 });
-
                 this.length = shapeArgs.shape.length;
             }
         } else {
@@ -136,6 +134,19 @@ class Square extends Rectangle {
         </section>      
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+
+        document.querySelector('.square').addEventListener('click', function (event) {
+            let selectedSquare = event.target.closest('.square');
+
+            if (event.target.className === 'btn-calcArea') {
+                let newSquare = refreshSquare({
+                    length: parseInt(document.getElementById("TxtL").value)
+                });
+
+                console.log(newSquare);
+                shapesArea.children[1].innerHTML = newSquare;
+            }
+        });
     };
 }
 
@@ -145,11 +156,11 @@ class Oval extends Shape {
 
     constructor(shapeArgs) {
         if (shapeArgs.hasOwnProperty('shape')) {
-            if (shapeArgs.constructor.name === "Shape") {
+            if (shapeArgs.shape.constructor.name === "Shape") {
                 super(shapeArgs.shape.x, shapeArgs.shape.y);
                 this.a = shapeArgs.a;
                 this.b = shapeArgs.b;
-            } else if (shapeArgs.constructor.name === "Oval") {
+            } else if (shapeArgs.shape.constructor.name === "Oval") {
                 super(shapeArgs.shape.x, shapeArgs.shape.y);
                 this.a = shapeArgs.shape.a;
                 this.b = shapeArgs.shape.b;
@@ -162,7 +173,7 @@ class Oval extends Shape {
     }
 
     getCircumference = () => 3.14 * (this.a + this.b);
-    ;
+
     getArea = () => (3.14 * (this.a) * (this.b));
 
     log() {
@@ -185,6 +196,19 @@ class Oval extends Shape {
         </section>      
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+
+        document.querySelector('.oval').addEventListener('click', function (event) {
+            let selectedOval = event.target.closest('.square');
+
+            if (event.target.className === 'btn-calcArea') {
+                let newOval = refreshOval({
+                    a: parseInt(document.getElementById("TxtA").value),
+                    b: parseInt(document.getElementById("TxtB").value)
+                });
+
+                shapesArea.children[2].innerHTML = newOval;
+            }
+        });
     };
 
 }
@@ -215,7 +239,7 @@ class Circle extends Oval {
 
     displayEditor = () => {
         let rectangleHtml = `
-        <section class="oval">
+        <section class="circle">
         <div class="data">
                 <input id="TxtR" placeholder="r value">
                 <input value="Circrimference : ${this.getCircumference()}" disabled>
@@ -226,6 +250,18 @@ class Circle extends Oval {
         </section>      
       `
         shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+
+        document.querySelector('.circle').addEventListener('click', function (event) {
+            let selectedCircle = event.target.closest('.circle');
+
+            if (event.target.className === 'btn-calcArea') {
+                let newCircle = refreshCircle({
+                    r: parseInt(document.getElementById("TxtR").value),
+                });
+
+                shapesArea.children[3].innerHTML = newCircle;
+            }
+        });
     };
 
 }
@@ -282,6 +318,76 @@ function refreshRect(userInput) {
       `;
 
     return rectangleHtml;
+}
+
+function refreshSquare(userInput) {
+    let square = drawArea.getShapes()[1];
+
+    if (userInput.hasOwnProperty('length')) {
+        square.length = userInput.length;
+    }
+
+    let newSquare = new Square({shape: square});
+
+    let squareHtml = `
+        <section class="square">
+             <div class="data">
+                <input id="TxtL" placeholder="L value">
+                <input value="Circrimference : ${newSquare.getCircumference()}" disabled>
+                <input value="Area : ${newSquare.getArea()}" disabled>
+                <input value="Type : ${newSquare.getType()}" disabled>      
+                <button class="btn-calcArea">Calculate</button>      
+            </div>
+        </section>      
+      `
+    return squareHtml;
+}
+
+function refreshOval(userInput) {
+    let oval = drawArea.getShapes()[2];
+
+    if (userInput.hasOwnProperty('a') && userInput.hasOwnProperty('b')) {
+        oval.a = userInput.a;
+        oval.b = userInput.b;
+    }
+
+    let newOval = new Oval({shape: oval});
+
+    let ovalHtml = `
+        <section class="oval">
+             <div class="data">
+                <input id="TxtA" placeholder="A value">
+                <input id="TxtB" placeholder="B value">
+                <input value="Circrimference : ${newOval.getCircumference()}" disabled>
+                <input value="Area : ${newOval.getArea()}" disabled>
+                <input value="Type : ${newOval.getType()}" disabled>      
+                <button class="btn-calcArea">Calculate</button>      
+            </div>
+        </section>      
+      `
+    return ovalHtml;
+}
+
+function refreshCircle(userInput) {
+    let circle = drawArea.getShapes()[3];
+    if (userInput.hasOwnProperty('r')) {
+        circle.r = userInput.r;
+    }
+
+    let newCircle = new Circle({shape: circle});
+
+    let circleHtml = `
+        <section class="circle">
+             <div class="data">
+                <input id="TxtR" placeholder="R value">
+                <input value="Circrimference : ${newCircle.getCircumference()}" disabled>
+                <input value="Area : ${newCircle.getArea()}" disabled>
+                <input value="Type : ${newCircle.getType()}" disabled>      
+                <button class="btn-calcArea">Calculate</button>      
+            </div>
+        </section>      
+      `
+    return circleHtml;
 }
 
 let shapes = [
