@@ -1,0 +1,40 @@
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+#Shapes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-calcArea,
+.btn-calcCircumference {
+    width: 100%;
+    height: 30px;
+    background-color: aquamarine;
+    color: black;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 0 0 0;
+
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-calcArea:active,
+.btn-calcCircumference:active {
+    background-color: #036363;
+}
+
+.oval,
+.rectangle {
+    margin: auto;
+    padding: 10px;
+}

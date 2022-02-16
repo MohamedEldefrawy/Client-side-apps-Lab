@@ -1,3 +1,5 @@
+let shapesArea = document.getElementById("Shapes");
+
 class Shape {
     x = 0;
     y = 0;
@@ -49,6 +51,23 @@ class Rectangle extends Shape {
             Circumference: ${this.getCircumference()}  Area:${this.getArea()}  Type:${this.getType()}
         `);
     }
+
+    displayEditor = () => {
+        let rectangleHtml = `
+        <section class="rectangle">
+         <div class="data">
+                <input id="TxtH" placeholder="H value">
+                <input id="TxtW" placeholder="W value">
+                <input value="Circrimference : ${this.getCircumference()}" disabled>
+                <input value="Area : ${this.getArea()}" disabled>
+                <input value="Type : ${this.getType()}" disabled>      
+                <button class="btn-calcArea">Area</button>      
+                <button class="btn-calcCircumference">Circumference</button>      
+        </div>
+        </section>      
+      `
+        shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+    };
 }
 
 class Square extends Rectangle {
@@ -75,6 +94,22 @@ class Square extends Rectangle {
             Circumference: ${this.getCircumference()}  Area:${this.getArea()}  Type:${this.getType()}
         `);
     }
+
+    displayEditor = () => {
+        let rectangleHtml = `
+        <section class="rectangle">
+         <div class="data">
+                <input id="TxtL" placeholder="L value">
+                <input value="Circrimference : ${this.getCircumference()}" disabled>
+                <input value="Area : ${this.getArea()}" disabled>
+                <input value="Type : ${this.getType()}" disabled>      
+                <button class="btn-calcArea">Area</button>      
+                <button class="btn-calcCircumference">Circumference</button>      
+        </div>
+        </section>      
+      `
+        shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+    };
 }
 
 class Oval extends Shape {
@@ -97,6 +132,23 @@ class Oval extends Shape {
         `);
     }
 
+    displayEditor = () => {
+        let rectangleHtml = `
+        <section class="oval">
+        <div class="data">
+                <input id="TxtA" placeholder="a value">
+                <input id="TxtB" placeholder="b value">
+                <input value="Circrimference : ${this.getCircumference()}" disabled>
+                <input value="Area : ${this.getArea()}" disabled>
+                <input value="Type : ${this.getType()}" disabled>      
+                <button class="btn-calcArea">Area</button>      
+                <button class="btn-calcCircumference">Circumference</button>      
+        </div>
+        </section>      
+      `
+        shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+    };
+
 }
 
 class Circle extends Oval {
@@ -112,6 +164,24 @@ class Circle extends Oval {
             Circumference: ${this.getCircumference()}  Area:${this.getArea()}  Type:${this.getType()}
         `);
     }
+
+
+    displayEditor = () => {
+        let rectangleHtml = `
+        <section class="oval">
+        <div class="data">
+                <input id="TxtR" placeholder="r value">
+                <input value="Circrimference : ${this.getCircumference()}" disabled>
+                <input value="Area : ${this.getArea()}" disabled>
+                <input value="Type : ${this.getType()}" disabled>      
+                <button class="btn-calcArea">Area</button>      
+                <button class="btn-calcCircumference">Circumference</button>      
+        </div>
+        </section>      
+      `
+        shapesArea.insertAdjacentHTML('beforeend', rectangleHtml);
+    };
+
 }
 
 class DrawArea {
@@ -124,6 +194,12 @@ class DrawArea {
     logShapes() {
         for (const shape of this.shapes) {
             shape.log();
+        }
+    }
+
+    renderShapes() {
+        for (const shape of this.shapes) {
+            shape.displayEditor();
         }
     }
 }
@@ -141,3 +217,4 @@ let shapes = [
 let drawArea = new DrawArea();
 drawArea.addShapes(shapes);
 drawArea.logShapes();
+drawArea.renderShapes();
