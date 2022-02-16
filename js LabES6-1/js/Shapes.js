@@ -23,10 +23,21 @@ class Rectangle extends Shape {
     height = 1;
     width = 1;
 
-    constructor(x, y, height, width) {
-        super(x, y);
-        this.height = height;
-        this.width = width;
+    constructor(shape = undefined, x = 0, y = 0, height = 0, width = 0) {
+
+        if (typeof shape === 'undefined') {
+            super(x, y);
+            this.height = height;
+            this.width = width;
+        } else if (shape.constructor.name === "Shape") {
+            super(shape.x, shape.y);
+            this.height = height;
+            this.width = width;
+        } else if (shape.constructor.name === "Rectangle") {
+            super(shape.x, shape.y);
+            this.height = shape.height;
+            this.width = shape.width;
+        }
     }
 
     getCircumference = () => (this.height + this.width) * 2;
@@ -41,9 +52,17 @@ class Rectangle extends Shape {
 class Square extends Rectangle {
     length = 1;
 
-    constructor(x, y, length) {
-        super(x, y, length, length);
-        this.length = length;
+    constructor(shape = undefined, x = 0, y = 0, length = 0) {
+        if (typeof shape === 'undefined') {
+            super(undefined, x, y, length, length);
+            this.length = length;
+        } else if (shape.constructor.name === "Shape") {
+            super(shape.x, shape.y, length, length);
+            this.length = length;
+        } else if (shape.constructor.name === "Square") {
+            super(shape.x, shape.y, shape.length, shape.length);
+            this.length = shape.length;
+        }
     }
 
     log() {
@@ -106,8 +125,8 @@ class DrawArea {
 
 
 let shapes = [
-    new Rectangle(0, 0, 5, 10),
-    new Square(0, 0, 5),
+    new Rectangle(new Rectangle(undefined, 0, 0, 10, 5)),
+    new Square(undefined, 0, 0, 5),
     new Oval(0, 0, 10, 5),
     new Circle(0, 0, 5)
 ]
