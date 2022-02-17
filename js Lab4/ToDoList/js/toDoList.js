@@ -47,9 +47,13 @@ class ToDoList {
                 this.changeTaskStatus(task.innerHTML);
             } else if (event.target.classList.contains('btn-remove') || event.target.classList.contains('fa-trash-alt')) {
                 let task = event.target.closest('.task');
+
+                this.removeFromToDoList(new Task({
+                    taskName: task.firstElementChild.innerHTML,
+                    isCompleted: task.lastElementChild.classList.contains('finished-task')
+                }));
+
                 this.tasksSection.removeChild(task);
-                event.stopPropagation();
-                this.removeFromToDoList(task.firstElementChild.innerHTML);
             }
         });
     }
@@ -60,19 +64,20 @@ class ToDoList {
     }
 
     changeTaskStatus = task => {
-        let index = this.toDoList.tasks.findIndex(function (element) {
-            return element.taskName === task;
+        let index = this.toDoList.findIndex((element) => {
+            return element.task.taskName === task.task.taskName;
         });
 
-        let changeStatusFlag = this.toDoList.tasks[index].isCompleted
-        this.toDoList.tasks[index].isCompleted = !changeStatusFlag;
+        this.toDoList[index].task.isCompleted = !this.toDoList[index].task.isCompleted;
         localStorage.toDoList = JSON.stringify(this.toDoList);
     };
 
     removeFromToDoList = task => {
+
         let index = this.toDoList.findIndex((element) => {
-            return element.taskName === task;
+            return element.task.taskName === task.task.taskName;
         });
+
         this.toDoList.splice(index, 1);
         localStorage.toDoList = JSON.stringify(this.toDoList);
     };
