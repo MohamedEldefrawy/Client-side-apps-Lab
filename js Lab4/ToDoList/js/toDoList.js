@@ -70,10 +70,10 @@ class ToDoList {
     };
 
     removeFromToDoList = task => {
-        let index = this.toDoList.tasks.findIndex((element) => {
+        let index = this.toDoList.findIndex((element) => {
             return element.taskName === task;
         });
-        this.toDoList.tasks.splice(index, 1);
+        this.toDoList.splice(index, 1);
         localStorage.toDoList = JSON.stringify(this.toDoList);
     };
 
