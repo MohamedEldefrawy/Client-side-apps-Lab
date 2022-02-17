@@ -4,10 +4,6 @@ class Task {
     constructor(task) {
         this.task = task;
     }
-
-    getTask() {
-        return this.task;
-    }
 }
 
 class ToDoList {
@@ -21,7 +17,8 @@ class ToDoList {
         this.txtTaskName = document.getElementById("txtTaskName");
         this.btnAddTask = document.getElementById("btnAddTask");
         this.tasksSection = document.getElementById("Tasks");
-        this.toDoList = {tasks: []};
+        // this.toDoList = ;
+        this.toDoList = [];
 
         this.btnAddTask.addEventListener("click", (event) => {
             let newTaskElement = `
@@ -38,7 +35,6 @@ class ToDoList {
                 taskName: this.txtTaskName.value,
                 isCompleted: false
             }));
-
             this.txtTaskName.value = "";
         });
 
@@ -59,8 +55,7 @@ class ToDoList {
     }
 
     saveToDoList(task) {
-        this.toDoList.tasks.push(task);
-        console.log(this.toDoList.tasks);
+        this.toDoList.push(task);
         localStorage.toDoList = JSON.stringify(this.toDoList);
     }
 
@@ -84,12 +79,10 @@ class ToDoList {
 
     renderTasks = () => {
         if (localStorage.toDoList) {
-            this.toDoList.tasks = JSON.parse(localStorage.toDoList);
+            this.toDoList = JSON.parse(localStorage.toDoList);
 
-            this.toDoList.tasks.tasks.forEach((task) => {
+            this.toDoList.forEach((task) => {
                 let taskCompletedClass = task.task.isCompleted ? `task-body finished-task` : `task-body`;
-                console.log("task completion = " + taskCompletedClass);
-
                 let taskElement = `
                 <div class="task">
                     <div  data-name="${task.task.taskName}" class = "${taskCompletedClass}">${task.task.taskName}</div>
