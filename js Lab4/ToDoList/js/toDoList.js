@@ -40,19 +40,18 @@ class ToDoList {
 
         this.tasksSection.addEventListener("click", event => {
             event.stopPropagation();
+            let task = event.target.closest('.task');
+            let selectedTask = {
+                taskName: task.firstElementChild.innerHTML,
+                isCompleted: task.lastElementChild.classList.contains('finished-task')
+            }
+
             if (event.target.classList.contains('btn-done') || event.target.classList.contains('fa-check')) {
-                let task = event.target.closest('.task').firstElementChild;
                 task.classList.toggle("finished-task");
-                console.log(task)
-                this.changeTaskStatus(task.innerHTML);
+                this.changeTaskStatus(selectedTask);
             } else if (event.target.classList.contains('btn-remove') || event.target.classList.contains('fa-trash-alt')) {
-                let task = event.target.closest('.task');
 
-                this.removeFromToDoList(new Task({
-                    taskName: task.firstElementChild.innerHTML,
-                    isCompleted: task.lastElementChild.classList.contains('finished-task')
-                }));
-
+                this.removeFromToDoList(selectedTask);
                 this.tasksSection.removeChild(task);
             }
         });
@@ -65,9 +64,10 @@ class ToDoList {
 
     changeTaskStatus = task => {
         let index = this.toDoList.findIndex((element) => {
-            return element.task.taskName === task.task.taskName;
+            return element.task.taskName === task.taskName;
         });
 
+        console.log(index);
         this.toDoList[index].task.isCompleted = !this.toDoList[index].task.isCompleted;
         localStorage.toDoList = JSON.stringify(this.toDoList);
     };
@@ -75,7 +75,7 @@ class ToDoList {
     removeFromToDoList = task => {
 
         let index = this.toDoList.findIndex((element) => {
-            return element.task.taskName === task.task.taskName;
+            return element.task.taskName === task.taskName;
         });
 
         this.toDoList.splice(index, 1);
@@ -89,8 +89,8 @@ class ToDoList {
             this.toDoList.forEach((task) => {
                 let taskCompletedClass = task.task.isCompleted ? `task-body finished-task` : `task-body`;
                 let taskElement = `
-                <div class="task">
-                    <div  data-name="${task.task.taskName}" class = "${taskCompletedClass}">${task.task.taskName}</div>
+                <div class="task ${taskCompletedClass}">
+                    <div  data-name="${task.task.taskName}">${task.task.taskName}</div>
                     <div class="task-controls">
                     <a class="btn-done"><i class="fas fa-check"></i></a>
                     <a class="btn-remove"><i class="fas fa-trash-alt"></i></a>
