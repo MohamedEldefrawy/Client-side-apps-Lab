@@ -1,95 +1,124 @@
-var btnAddTask = document.getElementById("btnAddTask");
-var txtTaskName = document.getElementById("txtTaskName");
-var tasksSection = document.getElementById("Tasks");
+class Task {
+    task;
 
-var toDoList = {
-    tasks: []
-};
+    constructor(task) {
+        this.task = task;
+    }
 
-var task = {};
-
-
-window.addEventListener('load', function () {
-    getTasks();
-});
-
-function btnAddTaskClick() {
-    var newTaskElement = `
-        <div class="task">
-            <div class="task-body"  data-name="` + txtTaskName.value + `">` + txtTaskName.value + `</div>
-            <div class="task-controls">
-                <a class="btn-done" onclick="btnDoneClicked(event)"><i class="fas fa-check"></i></a>
-                <a class="btn-remove" onclick="btnDeleteClicked(event)"><i class="fas fa-trash-alt"></i></a>
-            </div>
-        </div>`;
-    tasksSection.insertAdjacentHTML('beforeend', newTaskElement);
-    saveToDoList(txtTaskName.value, false);
-    txtTaskName.value = "";
+    getTask() {
+        return this.task;
+    }
 }
 
-function btnDoneClicked(event) {
-    var task = event.currentTarget.closest('.task').firstElementChild;
-    task.classList.toggle("finished-task");
-    console.log(task)
-    changeTaskStatus(task.innerHTML);
-}
+class ToDoList {
+    toDoList;
+    btnAddTask;
+    txtTaskName;
+    tasksSection;
+    tasks;
 
-function btnDeleteClicked(event) {
-    var task = event.currentTarget.closest('.task');
-    tasksSection.removeChild(task);
-    event.stopPropagation();
-    removeFromToDoList(task.firstElementChild.innerHTML);
-}
+    constructor() {
+        this.txtTaskName = document.getElementById("txtTaskName");
+        this.btnAddTask = document.getElementById("btnAddTask");
+        this.tasksSection = document.getElementById("Tasks");
+        this.toDoList = {tasks: []};
 
-function saveToDoList(task, isCompleted) {
-    var createTask = {
-        taskName: task,
-        isCompleted: isCompleted
+        this.btnAddTask.addEventListener("click", (event) => {
+            let newTaskElement = `
+                <div class="task">
+                    <div class="task-body"  data-name="${this.txtTaskName.value}"> ${this.txtTaskName.value} </div>
+                    <div class="task-controls">
+                        <a class="btn-done"><i class="fas fa-check"></i></a>
+                        <a class="btn-remove"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>`;
+            this.tasksSection.insertAdjacentHTML('beforeend', newTaskElement);
+
+            this.saveToDoList(new Task({
+                taskName: this.txtTaskName.value,
+                isCompleted: false
+            }));
+
+            this.txtTaskName.value = "";
+        });
+
+        this.tasksSection.addEventListener("click", event => {
+            event.stopPropagation();
+            if (event.target.classList.contains('btn-done') || event.target.classList.contains('fa-check')) {
+                let task = event.target.closest('.task').firstElementChild;
+                task.classList.toggle("finished-task");
+                console.log(task)
+                this.changeTaskStatus(task.innerHTML);
+            } else if (event.target.classList.contains('btn-remove') || event.target.classList.contains('fa-trash-alt')) {
+                let task = event.target.closest('.task');
+                this.tasksSection.removeChild(task);
+                event.stopPropagation();
+                this.removeFromToDoList(task.firstElementChild.innerHTML);
+            }
+        });
+    }
+
+    saveToDoList(task) {
+        this.toDoList.tasks.push(task);
+        console.log(this.toDoList.tasks);
+        localStorage.toDoList = JSON.stringify(this.toDoList);
+    }
+
+    changeTaskStatus = task => {
+        let index = this.toDoList.tasks.findIndex(function (element) {
+            return element.taskName === task;
+        });
+
+        let changeStatusFlag = this.toDoList.tasks[index].isCompleted
+        this.toDoList.tasks[index].isCompleted = !changeStatusFlag;
+        localStorage.toDoList = JSON.stringify(this.toDoList);
     };
-    toDoList.tasks.push(createTask);
-    localStorage.toDoList = JSON.stringify(toDoList);
+
+    removeFromToDoList = task => {
+        let index = this.toDoList.tasks.findIndex((element) => {
+            return element.taskName === task;
+        });
+        this.toDoList.tasks.splice(index, 1);
+        localStorage.toDoList = JSON.stringify(this.toDoList);
+    };
+
+    renderTasks = () => {
+        if (localStorage.toDoList) {
+            this.toDoList.tasks = JSON.parse(localStorage.toDoList);
+
+            this.toDoList.tasks.tasks.forEach((task) => {
+                let taskCompletedClass = task.task.isCompleted ? `task-body finished-task` : `task-body`;
+                console.log("task completion = " + taskCompletedClass);
+
+                let taskElement = `
+                <div class="task">
+                    <div  data-name="${task.task.taskName}" class = "${taskCompletedClass}">${task.task.taskName}</div>
+                    <div class="task-controls">
+                    <a class="btn-done"><i class="fas fa-check"></i></a>
+                    <a class="btn-remove"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>`;
+                this.tasksSection.insertAdjacentHTML('beforeend', taskElement);
+            });
+        }
+    };
+
+    getToDoList() {
+        return this.toDoList;
+    }
 }
 
-function removeFromToDoList(task) {
-    var index = toDoList.tasks.findIndex(function (element) {
-        return element.taskName === task;
-    });
+class ToDoListStarter {
+    toDoList = new ToDoList();
 
-    toDoList.tasks.splice(index, 1);
-    localStorage.toDoList = JSON.stringify(toDoList);
+    renderToDoList() {
+        this.toDoList.getToDoList();
+        this.toDoList.renderTasks();
+    }
 }
 
-function getTasks() {
-
-    if (localStorage.toDoList)
-        var tasks = JSON.parse(localStorage.toDoList);
-
-    toDoList.tasks = tasks.tasks;
-    toDoList.tasks.forEach(function (task) {
-
-        var taskCompletedClass = task.isCompleted ? `task-body finished-task` : `task-body`;
-        console.log("task completion = " + taskCompletedClass);
+let startToDoList = new ToDoListStarter();
+startToDoList.renderToDoList();
 
 
-        var taskElement = `
-        <div class="task">
-            <div  data-name="` + task.taskName + `" class = "` + taskCompletedClass + `">` + task.taskName + `</div>
-            <div class="task-controls">
-            <a class="btn-done" onclick="btnDoneClicked(event)"><i class="fas fa-check"></i></a>
-            <a class="btn-remove" onclick="btnDeleteClicked(event)"><i class="fas fa-trash-alt"></i></a>
-        </div>
-    </div>
-        `;
-        tasksSection.insertAdjacentHTML('beforeend', taskElement);
-    });
-}
-
-function changeTaskStatus(task) {
-    var index = toDoList.tasks.findIndex(function (element) {
-        return element.taskName == task;
-    });
-    var changeStatusFlag = toDoList.tasks[index].isCompleted
-    toDoList.tasks[index].isCompleted = !changeStatusFlag;
-    localStorage.toDoList = JSON.stringify(toDoList);
-}
 
